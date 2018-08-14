@@ -1,0 +1,18 @@
+canvas{border: 1px solid #000;background: #efefef;}
+input.rangeSlider{-webkit-appearance:none;margin:5px 10px;width:90%}
+input.rangeSlider:focus{outline:0}
+input.rangeSlider:focus::-webkit-slider-runnable-track{background:#fbfbfc}
+input.rangeSlider:focus::-ms-fill-lower{background:#eceff1}
+input.rangeSlider:focus::-ms-fill-upper{background:#fbfbfc}
+input.rangeSlider::-webkit-slider-runnable-track{cursor:pointer;height:8px;transition:all .2s ease;width:100%;box-shadow:1px 1px 1px rgba(0,0,0,0.2),0 0 1px rgba(13,13,13,0.2);background:#eceff1;border:2px solid #cfd8dc;border-radius:5px}
+input.rangeSlider::-webkit-slider-thumb{box-shadow:4px 4px 4px rgba(0,0,0,0.2),0 0 4px rgba(13,13,13,0.2);background:rgba(36,44,82,1);border:2px solid #eceff1;border-radius:12px;cursor:pointer;height:24px;width:24px;-webkit-appearance:none;margin-top:-10px}
+input.rangeSlider::-moz-range-track{cursor:pointer;height:8px;transition:all .2s ease;width:100%;box-shadow:1px 1px 1px rgba(0,0,0,0.2),0 0 1px rgba(13,13,13,0.2);background:#eceff1;border:2px solid #cfd8dc;border-radius:5px}
+input.rangeSlider::-moz-range-thumb{box-shadow:4px 4px 4px rgba(0,0,0,0.2),0 0 4px rgba(13,13,13,0.2);background:#607d8b;border:2px solid #eceff1;border-radius:12px;cursor:pointer;height:24px;width:24px}
+input.rangeSlider::-ms-track{cursor:pointer;height:8px;transition:all .2s ease;width:100%;background:transparent;border-color:transparent;border-width:12px 0;color:transparent}
+input.rangeSlider::-ms-fill-lower{box-shadow:1px 1px 1px rgba(0,0,0,0.2),0 0 1px rgba(13,13,13,0.2);background:#dde3e6;border:2px solid #cfd8dc;border-radius:10px}
+input.rangeSlider::-ms-fill-upper{box-shadow:1px 1px 1px rgba(0,0,0,0.2),0 0 1px rgba(13,13,13,0.2);background:#eceff1;border:2px solid #cfd8dc;border-radius:10px}
+input.rangeSlider::-ms-thumb{box-shadow:4px 4px 4px rgba(0,0,0,0.2),0 0 4px rgba(13,13,13,0.2);background:#607d8b;border:2px solid #eceff1;border-radius:12px;cursor:pointer;height:24px;width:24px;margin-top:0}
+.pad20px{padding: 20px;}
+.animDiv{text-align: left;}
+.animControl{padding: 10px 5px;border: 1px solid #efefef;margin: 5px;background: #fbfbfb; text-align: center;}
+.anim-button{-webkit-border-radius: 0px !important; -moz-border-radius: 0px !important; border-radius: 0px !important;}

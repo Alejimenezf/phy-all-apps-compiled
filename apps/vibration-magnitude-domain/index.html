@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Bootstrap --> 
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" /> 
+	<title>Magnitudes de Vibración: Desplazamiento, Velocidad y Aceleración</title>
+	<link rel="stylesheet" type="text/css" href="css/phy-anim.css">
+</head>
+<body>
+	<header>
+		<div class="col-md-3"><img style="width: 100%; height: auto;" src="pdm.PNG"></div>
+		<div class="col-md-9" style="background: #242352">
+			<h2 style="color: #FBFBFB;">Magnitudes de Vibración: Desplazamiento, Velocidad y Aceleración</h2>
+		</div>
+	</header>
+	<br><br><br><br>
+	<div class="container">
+		<div class="animDiv row">
+			<div class="col-md-2 pad20px animControl" id="canvasDiv">
+				<input type="button" id="go" value = "&#9658;" class="btn btn-md btn-default anim-button" title="Go">
+				<input type="button" id="stop" value = "&#10074;&#10074;" class="btn btn-md btn-default anim-button" title="Pause">
+				<input type="button" id="reset" value = "&#xe031;" class="btn btn-md btn-default anim-button glyphicon" title="Reset"><br><br>
+				<label id= "radiusValue">Amplitude : 10 &microm </label>
+				<input type="range" class="rangeSlider" id="radius" min="0" step="2" max="30" value="10"><br>
+				<label id= "pAngleValue">Ángulo de fase : 0&deg;</label>
+				<input type="range" class="rangeSlider" id="phase" min="0" max="315" step="45" value="0"><br>
+				<label id= "frecValue">Frecuencia : 1 Hz</label>
+				<input type="range" class="rangeSlider" id="frecquency" min="0.5" max="4" step="0.5" value="1"><br><br>
+
+				<label id= "g1Value" hidden>X(t) : 1x</label>
+				<input type="hidden" class="" id="g1" min="1" max="10" step="1" value="1" hidden>
+				<br>
+
+				<label id= "g2Value" hidden>V(t) : 1x</label>
+				<input type="hidden" class="" id="g2" min="1" max="10" step="1" value="1" hidden>
+				<br>
+
+				<label id= "g3Value" hidden>A(t) : 1x</label>
+				<input type="hidden" class="" id="g3" min="1" max="10" step="1" value="1" hidden>
+				<br>
+			</div>
+			<div class="col-md-9">
+				<div class="col-lg-5">
+					<canvas id = "mainCanvas"></canvas>
+					<canvas id = "secondaryCanvas"></canvas>
+				</div>
+				<div class="col-lg-5">
+					<canvas id = "thirdCanvas"></canvas>
+					<canvas id = "fourthCanvas"></canvas>
+					<canvas id = "fifthCanvas"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

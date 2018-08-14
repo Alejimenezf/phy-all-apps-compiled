@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Bootstrap --> 
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" /> 
+	<title>Frecuencia Natural y Resonancia Mecánica</title>
+	<link rel="stylesheet" type="text/css" href="css/phy-anim.css">
+</head>
+<body>
+	<header>
+		<div class="col-md-3"><img style="width: 100%; height: auto;" src="pdm.PNG"></div>
+		<div class="col-md-9" style="background: #242352">
+			<h2 style="color: #FBFBFB;">Frecuencia Natural y Resonancia Mecánica</h2>
+		</div>
+	</header>
+	<br><br><br><br>
+	<div class="container-fluid">
+		<div class="animDiv row">
+			<div class="col-md-2 pad20px animControl" id="canvasDiv">
+				<input type="button" id="go" value = "&#9658;" class="btn btn-md btn-default anim-button" title="Go">
+				<input type="button" id="stop" value = "&#10074;&#10074;" class="btn btn-md btn-default anim-button" title="Pause">
+				<input type="button" id="reset" value = "&#xe031;" class="btn btn-md btn-default anim-button glyphicon" title="Reset">
+				<br><br>
+				<label>Vibracion libre</label><input type="radio" name="mode" id="mode1"value = "amp" checked = "true">
+				<br>
+				<label>Vibracion forzada</label><input type="radio" name="mode" id="mode2" value = "freq">
+				<br>
+				<label id= "radiusValue">Amplitud inicial (X<sub>0</sub>): 10 mm</label>
+				<input type="range" class="rangeSlider" id="radius" min="0" step="2" max="30" value="10"><br>
+				<label id= "massValue">Masa (M) : 1 Kg</label>
+				<input type="range" class="rangeSlider" id="mass" min="1" max="5" step="0.5" value="1"><br>
+				<label id= "kValue">Rigidez resorte (k) : 10 N/m</label>
+				<input type="range" class="rangeSlider" id="k" min="10" max="1000" step="10" value="10"><br>
+				<label id= "cValue">Amortiguamiento (c): 0.5 N/(m/s)</label>
+				<input type="range" class="rangeSlider" id="c" min="0.5" max="5" step="0.1" value="0.5"><br>
+				<label id= "freqValue">Frecuencia forzada : 1 Hz</label>
+				<input type="range" class="rangeSlider" id="frecquency" min="0.5" max="7" step="0.5" value="1"><br>
+				<br>
+				<br>
+				<label id= "naturalfreq">Frecuencia Natural : 1 Hz</label>
+				<br>
+				<br>
+				<label id= "phase">Phase : 0 deg</label>
+				<div>
+					<!-- <h3>Cronometro: <b><u><time id= "stopwatch">00:00</time></u></b></h3>	 -->
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-5">
+					<canvas id = "mainCanvas"></canvas>
+					<canvas id = "thirdCanvas"></canvas>
+				</div>
+				<div class="col-md-offset-1 col-md-5">
+					<canvas id = "secondaryCanvas"></canvas>
+					<canvas id = "fourthCanvas"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>

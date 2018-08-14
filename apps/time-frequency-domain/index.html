@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Bootstrap --> 
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" /> 
+	<title>Dominios del tiempo y la frecuencia</title>
+	<link rel="stylesheet" type="text/css" href="css/phy-anim.css">
+</head>
+<body>
+	<header>
+		<div class="col-md-3"><img style="width: 100%; height: auto;" src="pdm.PNG"></div>
+		<div class="col-md-9" style="background: #242352">
+			<h2 style="color: #FBFBFB;">Dominios del tiempo y la frecuencia</h2>
+		</div>
+	</header>
+	<br><br><br><br>
+	<div class="container">
+		<div class="animDiv">
+			<div class="col-md-6 pad20px controls" id="canvasDiv">
+				<input type="button" id="go" value = "&#9658;" class="btn btn-lg btn-default anim-button" title="Go">
+				<input type="button" id="stop" value = "&#10074;&#10074;" class="btn btn-lg btn-default anim-button" title="Pause">
+				<input type="button" id="reset" value = "&#xe031;" class="btn btn-lg btn-default anim-button glyphicon" title="Reset"><br>
+				<div class= "col-md-5 component" style="">
+					<h4>Componente # 1</h4>
+					<label id= "radiusValue">Amplitud : 0 &#181m</label>
+					<input type="range" class="rangeSlider" id="radius" min="0" step="10" max="150" value="0"><br>
+					<label id= "pAngleValue">Ángulo de Fase : 0&deg;</label>
+					<input type="range" class="rangeSlider" id="phase" min="0" max="315" step="45" value="0"><br>
+					<label id= "frecValue">Frecuencia : 1 Hz</label>
+					<input type="range" class="rangeSlider" id="frecquency" min="0.5" max="3" step="0.5" value="1"><br>
+				</div>
+				<div class= "col-md-5 component" style="">
+					<h4>Componente # 2</h4>
+					<label id= "radiusValue2">Amplitud : 0 &#181m</label>
+					<input type="range" class="rangeSlider" id="radius2" min="0" step="10" max="150" value="0"><br>
+					<label id= "pAngleValue2">Ángulo de Fase : 0&deg;</label>
+					<input type="range" class="rangeSlider" id="phase2" min="0" max="315" step="45" value="0"><br>
+					<label id= "frecValue2">Frecuencia : 1 Hz</label>
+					<input type="range" class="rangeSlider" id="frecquency2" min="0.5" max="3" step="0.5" value="1"><br>
+				</div>
+				<div class= "col-md-5 component" style="">
+					<h4>Componente # 3</h4>
+					<label id= "radiusValue3">Amplitud : 0 &#181m</label>
+					<input type="range" class="rangeSlider" id="radius3" min="0" step="10" max="150" value="0"><br>
+					<label id= "pAngleValue3">Ángulo de Fase : 0&deg;</label>
+					<input type="range" class="rangeSlider" id="phase3" min="0" max="315" step="45" value="0"><br>
+					<label id= "frecValue3">Frecuencia : 1 Hz</label>
+					<input type="range" class="rangeSlider" id="frecquency3" min="0.5" max="3" step="0.5" value="1"><br>
+				</div>
+				<div class= "col-md-5 component" style="">
+					<h4>Ruido</h4>
+					<label id= "radiusValueN">Amplitud : 0 &#181m</label>
+					<input type="range" class="rangeSlider" id="radiusN" min="0" step="1" max="30" value="0"><br>
+				</div>
+			</div>
+			<br><br>
+			<div class="col-md-6">
+				<!--    <div class="col-lg-5"><canvas id = "mainCanvas"></canvas></div>-->
+				<div class="col-lg-7"><canvas id = "secondaryCanvas"></canvas></div>
+				<div class="col-lg-7"><canvas id = "fCanvas"></canvas></div>				
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/code.js"></script>
+</body>
+</html>
