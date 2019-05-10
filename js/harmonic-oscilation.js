@@ -34,8 +34,16 @@ function add() {
             }
         }
     }
-    
-    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00");
+    var mill = 1000/60 * seconds;
+    mill = parseInt(mill)
+    var millString = "000";
+    if(mill < 10)
+    	millString = "00"+mill
+    else if(mill < 100)
+    	millString = "0"+mill
+    else
+    	millString = mill + "";
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +  ":" + millString;
 }
 
 

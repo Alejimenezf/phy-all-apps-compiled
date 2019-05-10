@@ -1,0 +1,4 @@
+.animDiv{text-align: left;}
+.animControl{padding: 10px 1px;border: 1px solid #efefef;margin: 0px;background: #fbfbfb; text-align: center;}
+.anim-button{-webkit-border-radius: 0px !important; -moz-border-radius: 0px !important; border-radius: 0px !important;}
+input.rangeSlider{-webkit-appearance:none;margin:5px 10px;width:90%}

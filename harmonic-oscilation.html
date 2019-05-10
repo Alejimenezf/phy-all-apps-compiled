@@ -3,12 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Bootstrap --> 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" /> 
-	<title>Physics Animations</title>
+	<title>Movimiento Oscilatorio Periódico</title>
 	<link rel="stylesheet" type="text/css" href="css/phy-anim.css">
 </head>
 <body>
-	<div class=container>
+	<div class="container">
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -20,7 +21,7 @@
 					</button>
 					<a class="navbar-brand" href="index.html" style="padding: 0px;"><img class="logo-img" src="img/pdm.PNG"></a>
 					<a class="navbar-brand wide-only"style="padding: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-					<a class="navbar-brand blue-text page-title">Physics Animations</a>
+					<a class="navbar-brand blue-text page-title">Movimiento Oscilatorio Periódico</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right blue-text">
@@ -40,30 +41,29 @@
 				</div>
 			</div>
 		</nav>
-		<div class="animDiv row" style="text-align: left;">
-			<div class="col-md-5 pad20px">
-				<h3>About PDM</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<div class="animDiv">
+			<div class="col-md-3 pad20px controls" id="canvasDiv">
+				<input type="button" id="go" value = "&#9658;" class="btn btn-lg btn-default anim-button" title="Go">
+				<input type="button" id="stop" value = "&#10074;&#10074;" class="btn btn-lg btn-default anim-button" title="Pause">
+				<input type="button" id="reset" value = "&#xe031;" class="btn btn-lg btn-default anim-button glyphicon" title="Reset"><br>
+				<label id= "radiusValue">Amplitud : 100 mm</label>
+				<input type="range" class="rangeSlider" id="radius" min="100" step="10" max="220" value="50"><br>
+				<label id= "pAngleValue">Ángulo de Fase : 0 &deg;</label>
+				<input type="range" class="rangeSlider" id="phase" min="0" max="315" step="45" value="0"><br>
+				<label id= "frecValue">Frecuencia : 1 Hz</label>
+				<input type="range" class="rangeSlider" id="frecquency" min="0.5" max="3" step="0.5" value="1"><br>
+				<div>
+					<h2>Cronómetro: <b><u><time id= "stopwatch">00:00:000</time></u></b></h2>	
+				</div>
 			</div>
-			<div class="col-md-6">
-				<br>
-				<h3>Animations</h3>
-				<!-- <br><br><br> -->
-				<a class="btn btn-default mar10px" href="circular-motion.html">Movimiento Circular Uniforme</a>
-				<br>
-				<a class="btn btn-default mar10px" href="harmonic-oscilation.html">Movimiento Oscilatorio Periódico</a>
-				<br>
-				<a class="btn btn-default mar10px" href="rotating-body.html">Vibración de un cuerpo giratorio</a>
-				<br>
-				<a class="btn btn-default mar10px" href="time-frequency-domain.html">Dominios del tiempo y la frecuencia</a>
-				<br>
-				<a class="btn btn-default mar10px" href="vibration-magnitude-domain.html">Magnitudes de Vibración: Desplazamiento, Velocidad y Aceleración</a>
-				<br>
-				<a class="btn btn-default mar10px" href="natural-frequency-forced.html">Frecuencia Natural y Resonancia Mecánica</a>
+			<div class="col-md-9">
+				<div class="col-lg-5"><canvas id = "mainCanvas"></canvas></div>
+				<div class="col-lg-7" style="left: -110px;"><canvas id = "secondaryCanvas"></canvas></div>				
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="js/harmonic-oscilation.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://bootstrapdocs.com/v3.3.6/docs/dist/js/bootstrap.min.js"></script>
 </html>

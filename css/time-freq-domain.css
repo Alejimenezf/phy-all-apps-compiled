@@ -1,0 +1,8 @@
+
+.cronometro{left: -40px; top: 20px; position: relative; z-index: -999;}
+.pad20px{padding: 20px;}
+.animDiv{text-align: center;}
+.animControl{padding: 10px 20px;border: 1px solid #efefef;; margin: 5px;background: #fbfbfb;}
+.anim-button{-webkit-border-radius: 0px !important; -moz-border-radius: 0px !important; border-radius: 0px !important;margin: -20px 5px 0px !important;}
+.component{margin: 5px; border:1px solid #444;}
+.component h4{padding: 5px 10px; background: #242352; color: #FBFBFB}

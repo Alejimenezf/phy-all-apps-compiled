@@ -48,7 +48,7 @@ canvas3.style.display = "none"
 canvas4.style.display = "none"
 freqValue.style.display = "none"
 freqSlider.style.display = "none"
-
+phaseBOX.style.display = "none"
 // label slider connection
 ampSlider.oninput = function(){
 	ampValue.innerHTML = "Amplitud inicial (X<sub>0</sub>): "+this.value+" mm";
@@ -101,12 +101,13 @@ playbtn.onclick = function(){
 			Box.drawGraph2();
 			Box.drawGraph3();
 		}
+		Box.setMaxGraphValue();
+		resetGraph(canvas2,2,Box.graph2Max)
 		//Set Natural Freq Value
 		naturalfreq.innerHTML = "Frecuencia Natural : " +Box.getNaturalFreq()+" Hz";
 		
 	}
-	phaseBOX.innerHTML = "Phase : "+Box.getPhase()+" deg";
-	console.log(Box.getPhase())
+	phaseBOX.innerHTML = "Desfase: "+Box.getPhase()+" grados";
 
 	playbtn.disabled = true
 	pausebtn.disabled = false;
@@ -133,7 +134,7 @@ resetbtn.onclick = function(){
 
 	cancelAnimationFrame(animation)
 	naturalfreq.innerHTML = "Frecuencia Natural : 0.5 Hz";
-	phase.innerHTML = "Phase : 0 deg";
+	phase.innerHTML = "Desfase: 0 grados";
 	playbtn.disabled = false
 	ampSlider.disabled = false;
 	massSlider.disabled = false;
@@ -152,7 +153,7 @@ resetbtn.onclick = function(){
 	cSlider.oninput();
 	freqSlider.value = freqSlider.defaultValue;
 	freqSlider.oninput();
-	resetGraph(canvas2 ,2)
+	resetGraph(canvas2 ,2 , Box.graph2Max)
 	resetGraph(canvas3 ,3)
 	resetGraph(canvas4 ,4)
 	Box.setDeltaAngle(freqSlider.value);
@@ -169,6 +170,7 @@ radiobtn1.oninput = function(){
 	canvas4.style.display = "none"
 	freqValue.style.display = "none"
 	freqSlider.style.display = "none"
+	phaseBOX.style.display = "none"
 	ampSlider.style.display = "block"
 	ampValue.style.display = "block"
 	resetbtn.onclick();
@@ -179,6 +181,7 @@ radiobtn2.oninput = function(){
 	canvas4.style.display = "block"
 	freqValue.style.display = "block"
 	freqSlider.style.display = "block"
+	phaseBOX.style.display = "block"
 	ampSlider.style.display = "none"
 	ampValue.style.display = "none"
 	resetbtn.onclick();
@@ -202,8 +205,8 @@ function setGraphBg(canvasobj , num , max){
 	c.lineTo(canvasobj.width,x)
 	c.stroke()
 
-	numY =60
-	decrement = 10 
+	numY = max!= null ? max : 60;
+	decrement = numY/6 
 	i=5
 	if(num >2){
 		i=20;
@@ -222,9 +225,9 @@ function setGraphBg(canvasobj , num , max){
 		c.lineTo(52,i);
 		c.stroke()
 
-		title = "" + numY
+		title = "" + numY.toFixed(1)
 		c.font = "9px Arial";
-		c.fillText(title,29,i+2);
+		c.fillText(title,24,i+2);
 		numY -= decrement
 	}
 	ah = 122
@@ -241,9 +244,9 @@ function setGraphBg(canvasobj , num , max){
 		c.lineTo(i,ah+7);
 		c.stroke()
 		if(num >2){
-			title = "" + numY
+			title = "" + numY.toFixed(1)
 			c.font = "9px Arial";
-			c.fillText(title,i-5,ah+18);
+			c.fillText(title,i-10,ah+18);
 			numY += 1
 		}
 	}
@@ -251,10 +254,13 @@ function setGraphBg(canvasobj , num , max){
 	// set Graph title
 	switch(num){
 		case 2:
-			title = "X(t) " +String.fromCharCode(8594) + "(s)";
+			title = "X(t)";
 			c.font = "15px Arial";
 			c.fillText(title,canvasobj.width/2-10,15);
-			title =  String.fromCharCode(8592) +" (mm) "+String.fromCharCode(8594);
+			title = "tiempo (s)";
+			c.font = "15px Arial";
+			c.fillText(title,canvasobj.width/2-10,canvasobj.height/2+15);
+			title =  String.fromCharCode(8592) +" X(mm) "+String.fromCharCode(8594);
 			c.save()
 			c.font = "15px Arial";
 			c.rotate(toRadians(-90))
@@ -266,8 +272,8 @@ function setGraphBg(canvasobj , num , max){
 			c.font = "15px Arial";
 			c.fillText(title,canvasobj.width/2-60,15);
 			title = "f(Hz)"+String.fromCharCode(8594)
-			c.font = "15px Arial";
-			c.fillText(title,canvasobj.width/2-40,canvas3.height-8);
+			c.font = "10px Arial";
+			c.fillText(title,canvasobj.width/2-10,canvas3.height-6);
 
 			title =  "X(mm) "+String.fromCharCode(8594);
 			c.save()
@@ -280,11 +286,11 @@ function setGraphBg(canvasobj , num , max){
 			title = "Desfase";
 			c.font = "15px Arial";
 			c.fillText(title,canvasobj.width/2-15,15);
-			title = "(Hz)"+String.fromCharCode(8594)
-			c.font = "15px Arial";
-			c.fillText(title,canvasobj.width/2-40,canvas3.height-8);
+			title = "f(Hz)"+String.fromCharCode(8594)
+			c.font = "10px Arial";
+			c.fillText(title,canvasobj.width/2-10,canvas3.height-6);
 
-			title =  " (desfase) "+String.fromCharCode(8594);
+			title =  " Desfase(°)"+String.fromCharCode(8594);
 			c.save()
 			c.font = "15px Arial";
 			c.rotate(toRadians(-90))
@@ -296,11 +302,11 @@ function setGraphBg(canvasobj , num , max){
 }
 
 
-function resetGraph(cvs , n){
+function resetGraph(cvs , n , max){
 	ctx = cvs.getContext('2d')
 	ctx.clearRect(0,0,cvs.width,cvs.height)
 	if(n > 1)
-		setGraphBg(cvs,n)
+		setGraphBg(cvs,n,max)
 }
 // object class
 function box(){
@@ -315,6 +321,7 @@ function box(){
 	this.dt = 1/60
 	this.A = 0
 	this.dA = 0
+	this.graph2Max = 30
 	this.setDeltaAngle = function (freq){
 		// this.dt = parseFloat(freq/60)
 		this.dt = freq/60
@@ -344,20 +351,38 @@ function box(){
 		}
 		
 	}
+	this.setMaxGraphValue = function(){
+		if(radiobtn1.checked){
+			this.graph2Max = Math.abs(this.radius)
+		}else{
+			fn = (1/(2*Math.PI)) *Math.sqrt(this.k/this.m)
+			r = this.f/fn;
+			Xp = 1/this.k * (1/(Math.sqrt(Math.pow(1-Math.pow(r,2),2)+ Math.pow(2*D*r,2))))*1000
+			this.graph2Max = Xp;
+		}
+	}
 	this.getPhase =function(){
-		fn = (1/(2*Math.PI)) *Math.sqrt(this.k/this.m)
+		
 		D = this.c/(2*Math.sqrt(this.k * this.m))
 		r = this.f/fn;
-		ans = Math.atan((-2*D*r)/(1-Math.pow(r,2)))
+		fn = (1/(2*Math.PI)) *Math.sqrt(this.k*(1-(D*D))/this.m)
+		ans = Math.atan((2*D*r)/(1-Math.pow(r,2)))
+		if(freqSlider.Value <= fn ){
+			ans =  ans * 180/Math.PI;
+		}
+		else{
+			ans =  (Math.atan((2*D*r)/(1-Math.pow(r,2)))* 180/Math.PI) + 180
+		}
 		return parseFloat(ans.toFixed(4))
 	}
 	this.getNaturalFreq = function(){
-		return parseFloat( 1/(2*Math.PI) * Math.sqrt(this.k/this.m)).toFixed(2);
+		D = this.c/(2*Math.sqrt(this.k * this.m))
+		return parseFloat( 1/(2*Math.PI) * Math.sqrt(this.k*(1-(D*D))/this.m)).toFixed(2);
 	}
 	this.update = function(){
 		this.draw();
 		this.staicRefrence();
-		xBefore = this.getX();
+		xBefore = this.getX();	
 		this.t += this.dt;
 		this.A += this.dA;
 		xAfter = this.getX();
@@ -375,8 +400,7 @@ function box(){
 	this.case1AllPoints=[]
 	this.zcount=0
 	this.case1data = function(){
-
-		hG1 =((this.getX()-canvas1.width/2)*2+canvas2.height/2)
+		hG1 =(((this.getX()-canvas1.width/2)*(120/this.graph2Max))+canvas2.height/2)
 		if(hG1 < 126 && hG1  > 123 ){
 			this.zcount ++;
 		}else{
@@ -387,8 +411,7 @@ function box(){
 			this.case1AllPoints.push(hG1);
 		// printing graph
 		inc = Math.ceil(this.case1AllPoints.length/(canvas2.width-30))
-		
-		resetGraph(canvas2,2)
+		resetGraph(canvas2,2, this.graph2Max)
 		ctx = canvas2.getContext('2d')
 		ctx.beginPath();
 		ctx.moveTo(50,this.case1AllPoints[0])
@@ -411,7 +434,7 @@ function box(){
 		startX = 40
 		Xvalue = this.getX()
 		increment = (Xvalue-25)/numberOfLines
-		if(radiobtn2.checked){
+		
 			// damper line
 			c2.beginPath()
 			c2.moveTo(startX , canvas1.height/2 -13)
@@ -428,13 +451,23 @@ function box(){
 			c2.rect((Xvalue -startX-10)/2+startX-15,canvas1.height/2 -20, 26,14)
 			c2.fillStyle = "#242352"
 			c2.fill();
+		if(radiobtn2.checked){
 			// Arrow
-			if(this.direction == 0 && this.getX() < canvas1.width/2){
-				c2.beginPath();
-				title = ""+String.fromCharCode(171)
-				c2.font = "50px Arial";
-				c2.fillText(title,this.getX()+30,130);
-			}			
+			var phaseAngle = this.getPhase();
+			var currentAngle = this.A % 360
+			var duration = 10
+			var opacity = 0
+			if(currentAngle >= (phaseAngle-duration) && currentAngle <= (phaseAngle+duration)){
+				opacity  =1
+			}
+			c2.save();
+			c2.beginPath();
+			title = ""+String.fromCharCode(171)
+			c2.font = "50px Arial";
+			//c2.fillStyle = 'rgba(36,35,82,'+ (-Math.sin(toRadians(this.A)))+')';
+			c2.fillStyle = 'rgba(36,35,82,'+opacity+')';
+			c2.fillText(title,this.getX()+25,130);
+			c2.restore();			
 		}
 		
 		// zigzag lines
@@ -465,7 +498,7 @@ function box(){
 		}
 		c = canvas2.getContext('2d');
 		// height
-		hG1 =((this.getX()-canvas1.width/2)*2+canvas2.height/2)
+		hG1 =(((this.getX()-canvas1.width/2)*(120/this.graph2Max))+canvas2.height/2)
 		c.beginPath();
 		c.rect(this.graphX,hG1,-1,-1);
 		c.fill();
@@ -479,7 +512,7 @@ function box(){
 		if(this.graphX > canvas2.width){
 			this.graphX = 50+inc
 			//this.lasty = 125
-			resetGraph(canvas2,2)
+			resetGraph(canvas2,2,this.graph2Max)
 		}
 	}
 	this.drawGraph2 = function(){
@@ -493,19 +526,21 @@ function box(){
 
 		for(f=0 ;f < 7; f+= 0.1 ){
 			r = f/fn
-			Xp = (1/this.k) * (1/Math.sqrt(Math.pow((1-(r*r)),2) + Math.pow(2*D*r,2)))*100
+			Xp = (1/this.k) * (1/(Math.sqrt(Math.pow((1-(r*r)),2) + Math.pow(2*D*r,2))))*1000
 			g2Values.push(Xp)
 			if(Xp > max)
 				max = Xp;
 		}
 		
+		console.log(g2Values);
+
 		upperLimit = Math.ceil(max/10)
 		c = canvas3.getContext('2d')
 		c.clearRect(0,0,canvas3.width , canvas3.height)
 		setGraphBg(canvas3 , 3,upperLimit*10)
 
 		// Vertival line...
-		xposition = (this.f*50) + 50;
+		xposition = (freqSlider.value*50) + 50;
 		c.beginPath();
 		c.moveTo(xposition,canvas3.height-30);
 		c.lineTo(xposition,10);
@@ -526,7 +561,6 @@ function box(){
 		c.stroke();
 
 		for(i = 0 ; i < 70 ; i++){
-			
 			x = 50+(i*5)
 			yVal = g2Values[i]/(upperLimit)*20
 			c.beginPath()
@@ -584,7 +618,7 @@ function box(){
 			can.fill()
 		}
 		// Vertival line...
-		xposition = (this.f*50) + 50;
+		xposition = (freqSlider.value*50) + 50;
 		can.beginPath();
 		can.moveTo(xposition,canvas4.height-30);
 		can.lineTo(xposition,10);
@@ -623,7 +657,7 @@ resetbtn.disabled = true;
 Box = new box();
 Box.setDeltaAngle(freqSlider.value);
 Box.update();
-setGraphBg(canvas2,2);
+setGraphBg(canvas2,2,Box.graph2Max);
 setGraphBg(canvas3,3);
 setGraphBg(canvas4,4);
 // helping functions

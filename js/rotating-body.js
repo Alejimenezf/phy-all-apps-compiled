@@ -1,14 +1,14 @@
 // heights and widths
 // canvas 1 heigh and width
-var boardWidth = 250
-var boardHeight = 250
+var boardWidth = 300
+var boardHeight = 300
 // canvas 2 heigh and width
-var boardWidthc2 = 320
-var boardHeightc2 = 250
+var boardWidthc2 = 439
+var boardHeightc2 = 300
 
 // canvas 3 heigh and width
-var boardWidthc3 = 250
-var boardHeightc3 = 320
+var boardWidthc3 = 439
+var boardHeightc3 = 300
 // some calculations
 function toDegrees (angle) {
   return angle * (180 / Math.PI);
@@ -48,14 +48,36 @@ function circleMotion(){
 	this.radius  = 0
 	this.currentAngle = 0
 	this.deltaAngle = 0
-
+	this.secondAngle = 0
 	this.draw = function(fill , border){
+		c.save()
 		c.beginPath();
-		c.arc(this.getX(),this.getY(),10, 0, 2 * Math.PI, false);
+		c.arc(this.getX(),this.getY(),70, 0, 2 * Math.PI, false);
+		var grd=c.createLinearGradient(this.getX(),this.getY(),((canvas.width/2)+110* Math.cos(toRadians(-this.secondAngle))),(canvas.height/2+110* Math.sin(toRadians(-this.secondAngle))));
+		this.secondAngle += this.deltaAngle
+
+		grd.addColorStop(0,"#DCDCDC");
+		grd.addColorStop(1,"#696969	");
 		c.strokeStyle = border;
-		c.fillStyle   = fill;
+		c.fillStyle   = grd;
 		c.stroke();		
 		c.fill();
+		c.restore()
+
+		c.beginPath();
+		c.arc(this.getX(),this.getY(),2, 0, 2 * Math.PI, false);
+		c.strokeStyle = "#FF552A";
+		c.fillStyle   = "#FF552A";
+		c.stroke();		
+		c.fill();
+
+		c.beginPath();
+		c.rect(canvas.width/2-3,canvas.height/2-3,6,6)
+		c.strokeStyle = "black";
+		c.fillStyle   = "black";
+		c.stroke();		
+		c.fill();
+		this.staticRefrences()
 	}
 
 	this.getX =function(){
@@ -68,29 +90,90 @@ function circleMotion(){
 	this.update = function(){
 		this.currentAngle -= this.deltaAngle
 		this.draw()
+	}
+
+	this.staticRefrences = function(){
+		
+		for(i = 25 ; i < canvas.height/2; i+=10 )
+		{
+			c.beginPath();
+			c.moveTo(canvas.width/2,i);
+			c.lineTo(canvas.width/2,i+5);
+			c.stroke();
+		}
+
+		for(i = canvas.width/2 ; i < canvas.width-30 ; i+=10 )
+		{
+			c.beginPath();
+			c.moveTo(i,canvas.height/2);
+			c.lineTo(i+5,canvas.height/2);
+			c.stroke();
+		}
+		// Y- Sensor
 		c.beginPath();
-		c.moveTo(canvas.width/2,canvas.height/2);
-		c.lineTo(mBall.getX()+1,mBall.getY()+1);
+		c.moveTo(canvas.width/2,25);
+		c.bezierCurveTo(canvas.width/2,20,145,6,170,5)
+		c.lineTo(170,5);
+		c.strokeStyle="black";	
+		c.lineWidth = 3;
 		c.stroke();
+
+		c.beginPath();
+		c.rect(canvas.width/2-3,47,6,3)
+		c.strokeStyle = "black";
+		c.fillStyle   = "#333";
+		c.lineWidth = 1;
+		c.stroke();
+		c.fill();
+
+		c.beginPath();
+		c.rect(canvas.width/2-5,22,10,25)
+		c.strokeStyle = "black";
+		c.fillStyle   = "yellow";
+		c.stroke();		
+		c.fill();
+
+		title = "Y"
+		c.font = "16px Arial";
+		c.strokeStyle = "black";
+		c.fillStyle   = "black";
+		c.fillText(title,canvas.width/2-20,15);
+
+		// X-Sensor
+		c.beginPath();
+		c.moveTo(canvas.width-24,canvas.height/2);
+		c.bezierCurveTo(canvas.width-24,canvas.height/2,296,145,295,165)
+		c.lineTo(295,165);
+		c.strokeStyle="black";
+		c.lineWidth = 3;
+		c.stroke();
+
+		c.beginPath();
+		c.rect(canvas.width-49,canvas.height/2-3,3,6)
+		c.strokeStyle = "black";
+		c.fillStyle   = "#333";
+		c.lineWidth = 1;
+		c.stroke();		
+		c.fill();
+
+		c.beginPath();
+		c.rect(canvas.width-46,canvas.height/2-5,25,10)
+		c.strokeStyle = "black";
+		c.fillStyle   = "yellow";
+		c.stroke();		
+		c.fill();
+
+		title = "X"
+		c.font = "16px Arial";
+		c.strokeStyle = "black";
+		c.fillStyle   = "black";
+		c.fillText(title,canvas.width-20,canvas.height/2-10);
+
+		c.lineWidth = 1
 	}
 }
 
-function backgroundSetup(){
-	c.beginPath();
-	c.arc(canvas.width/2,canvas.height/2,gradius, 0, 2 * Math.PI, false);
-	c.strokeStyle = "black";
-	c.fillStyle   = "white";
-	c.stroke();		
-	c.fill();
 
-
-	c.beginPath();
-	c.rect(canvas.width/2,canvas.height/2,2,2)
-	c.strokeStyle = "black";
-	c.fillStyle   = "black";
-	c.stroke();		
-	c.fill();
-}
 // xy canvases
 function xyaxis(){
 
@@ -113,8 +196,8 @@ function xyaxis(){
 		c2.stroke();
 	}
 
-	numY = 100
-	for(i=25 ; i < canvas2.height ; i+=20)
+	numY = 35
+	for(i=10 ; i < canvas2.height ; i+=20)
 	{
 		c2.beginPath();
 		c2.moveTo(18,i);
@@ -124,7 +207,7 @@ function xyaxis(){
 		title = "" + numY
 		c2.font = "9px Arial";
 		c2.fillText(title,1,i);
-		numY = numY-20
+		numY = numY-5
 	}
 
 	title = "Gráfico Y(t)"
@@ -134,59 +217,55 @@ function xyaxis(){
 	// canva c3
 	//y-axis
 	c3.beginPath();
-	c3.moveTo(canvas3.width/2,0);
-	c3.lineTo(canvas3.width/2,canvas3.height);
+	c3.moveTo(0,canvas3.height/2);
+	c3.lineTo(canvas3.width,canvas3.height/2);
 	c3.stroke();
 	//x-axis
 	c3.beginPath();
-	c3.moveTo(0,20);
-	c3.lineTo(canvas2.width,20);
+	c3.moveTo(20,0);
+	c3.lineTo(20, canvas3.height);
 	c3.stroke();
-	for(i=20 ; i < canvas3.height ; i+=60)
+	for(i=20 ; i < canvas3.width ; i+=60)
 	{
 
 		c3.beginPath();
-		c3.moveTo(canvas3.width/2-3,i);
-		c3.lineTo(canvas3.width/2+3,i);
+		c3.moveTo(i, canvas3.height/2-3);
+		c3.lineTo(i, canvas3.height/2+3);
 		c3.stroke();
 	}
 
-	numY = -100
-	for(i=25 ; i < canvas3.width ; i+=20)
+	numY = 35
+	for(i=10 ; i < canvas3.height ; i+=20)
 	{
 		c3.beginPath();
-		c3.moveTo(i, 18);
-		c3.lineTo(i, 23);
+		c3.moveTo(18, i);
+		c3.lineTo(23, i);
 		c3.stroke();
 			
 		title = "" + numY
 		c3.font = "9px Arial";
-		c3.fillText(title,i-10,15);
-		numY = numY+20
+		c3.fillText(title,1,i);
+		numY = numY-5
 	}
 
 	title = "Gráfico X(t)"
 	c3.font = "12px Arial";
-	c3.fillText(title,canvas3.width - 70,canvas3.height - 15);
+	c3.fillText(title,canvas3.width/2-(title.length*3),20);
 
 	title = "tiempo"+String.fromCharCode(8594)
 	c2.font = "15px Arial";
 	c2.fillText(title,canvas2.width/2-(title.length*3),canvas2.height-15);
 
 	title = "tiempo" + String.fromCharCode(8594)
-	c3.save()
-	c3.translate(0,0)
-	c3.rotate(Math.PI / 2)
 	c3.font = "15px Arial";
-	c3.fillText(title,canvas3.width/2,-15);
-	c3.restore()
+	c3.fillText(title,canvas3.width/2-(title.length*3),canvas3.height-15);
 }
 // updateing graphs
 function Dot(x,y,x2,y2){
 	this.x = x;
 	this.y = y;
-	this.x2 = x2;
-	this.y2 = y2;
+	this.x2 = y2;
+	this.y2 = x2;
 	this.dx = 0
 	this.draw = function(){
 		// canvas 2
@@ -202,6 +281,10 @@ function Dot(x,y,x2,y2){
 	}
 
 	this.update = function(xvalue , yvalue){
+
+		console.log(canvas2.height/2 + ((canvas.width/2 - xvalue )* 4))
+		xvalue = canvas2.height/2 + ((canvas.width/2 - xvalue )* 4)
+		yvalue = canvas3.height/2 + ((canvas.height/2 - yvalue )* 4)
 		// canvas 2
 		c2.beginPath();
 		c2.moveTo(this.x,this.y);
@@ -212,8 +295,8 @@ function Dot(x,y,x2,y2){
 		this.x += 1
 		this.y = yvalue
 		// c3
-		this.x2 =  xvalue
-		this.y2 += 1
+		this.x2 +=1  
+		this.y2 = canvas3.height - xvalue
 		// c2
 		c2.lineTo(this.x,this.y);
 		c2.stroke();
@@ -225,12 +308,8 @@ function Dot(x,y,x2,y2){
 		if(this.x > canvas2.width){
 			c2.clearRect(0,0, canvas2.width , canvas2.height);
 			this.x =20
-			xyaxis()
-		}
-
-		if(this.y2 > canvas3.height){
 			c3.clearRect(0,0, canvas3.width , canvas3.height);
-			this.y2 =20
+			this.x2 =20
 			xyaxis()
 		}
 		this.draw()
@@ -259,7 +338,7 @@ var c2 = canvas2.getContext('2d');
 var c3 = canvas3.getContext('2d');
 // global variables
 var animation
-var gradius = 50
+var gradius = 10
 var gangle = 0
 var gfrecq = 1
 // main canvas objects
@@ -270,9 +349,9 @@ mBall.radius = gradius
 mBall.currentAngle = -gangle
 mBall.deltaAngle = (360*gfrecq)/60
 
-graphDot = new Dot(20,canvas2.height/2 , canvas3.width/2,20)
+graphDot = new Dot(20,canvas2.height/2 , canvas3.height/2,20)
 // init
-backgroundSetup();
+
 mBall.draw();
 xyaxis()
 // buttons 
@@ -304,12 +383,12 @@ document.getElementById("reset").onclick = function (){
 	hours = 0
 	add()
 	// Gvariables
-	gradius = 50
+	gradius = 0
 	gangle = 0
 	gfrecq = 1
 
 	// set default values of slider values
-	radiusVal.innerHTML = "Radio : " + gradius + " mm"
+	radiusVal.innerHTML = "Amplitude : " + gradius + " &microm"
 	angleVal.innerHTML = "Ángulo de fase : " + gangle + "&deg;"
 	frecqVal.innerHTML = "Frecuencia : " + gfrecq + " Hz"
 	// set default values of sliders
@@ -325,7 +404,7 @@ document.getElementById("reset").onclick = function (){
 	angleSlider.disabled = false;
 	//Redraw
 	c.clearRect(0,0, canvas.width , canvas.height);
-	backgroundSetup();
+
 	mBall.draw();
 	// reset Graphs
 	c2.clearRect(0,0, canvas2.width , canvas2.height);
@@ -348,11 +427,10 @@ frecqVal = document.getElementById("frecValue")
 
 radiusSlider.oninput = function(){
 	//update corresponding value
-	radiusVal.innerHTML = "Radio : " + this.value + " mm"
+	radiusVal.innerHTML = "Amplitude : " + this.value + " &microm"
 	gradius = this.value
 	mBall.radius = gradius
 	c.clearRect(0,0, canvas.width , canvas.height);
-	backgroundSetup();
 	mBall.draw()
 }
 angleSlider.oninput = function(){
@@ -361,7 +439,7 @@ angleSlider.oninput = function(){
 	gangle = this.value
 	mBall.currentAngle = -gangle
 	c.clearRect(0,0, canvas.width , canvas.height);
-	backgroundSetup()
+
 	mBall.draw()
 }
 frecqSlider.oninput = function(){
@@ -377,8 +455,6 @@ function animate(){
 	add()
 	animation =  requestAnimationFrame(animate);
 	c.clearRect(0,0, canvas.width , canvas.height);
-	backgroundSetup();
 	mBall.update();
 	graphDot.update(mBall.getX() , mBall.getY())
-	console.log(graphDot)
 }
