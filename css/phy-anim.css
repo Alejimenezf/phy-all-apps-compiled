@@ -15,7 +15,7 @@ input.rangeSlider::-ms-fill-upper{box-shadow:1px 1px 1px rgba(0,0,0,0.2),0 0 1px
 input.rangeSlider::-ms-thumb{box-shadow:4px 4px 4px rgba(0,0,0,0.2),0 0 4px rgba(13,13,13,0.2);background:#607d8b;border:2px solid #eceff1;border-radius:12px;cursor:pointer;height:24px;width:24px;margin-top:0}
 .logo-img{height: 100%;}
 .blue-text{color: #1A244E !important}
-.page-title{padding: 15px 0px !important;margin: 0px !important;}
+.page-title{padding: 15px 0px !important;margin: 0px !important;font-weight: 600;}
 .pad20px{padding: 20px;}
 .mar10px{margin: 10px 0px;}
 .animDiv{text-align: center;}
@@ -23,7 +23,9 @@ input.rangeSlider::-ms-thumb{box-shadow:4px 4px 4px rgba(0,0,0,0.2),0 0 4px rgba
 .anim-button{-webkit-border-radius: 0px !important; -moz-border-radius: 0px !important; border-radius: 0px !important;}
 @media (min-width: 769px) {
 	.wide-only{display: block;}
+	.page-title{font-size: 18px;}
 }
 @media (max-width: 769px) {
 	.wide-only{display: none;}
+	.page-title{font-size: 15px;}
 }
