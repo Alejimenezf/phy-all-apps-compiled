@@ -511,5 +511,5 @@ function animate(){
 	c.clearRect(0,0, canvas.width , canvas.height);
 	c2.clearRect(0,0, canvas2.width , canvas2.height);
 	mBall.update();
-	graphDot.update(mBall.getY(),mBall.getY1(), mBall.getY2())
+	graphDot.update(mBall.getX(),mBall.getY1(), mBall.getY2())
 }

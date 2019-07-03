@@ -283,8 +283,8 @@ function Dot(x,y,x2,y2){
 	this.update = function(xvalue , yvalue){
 
 		console.log(canvas2.height/2 + ((canvas.width/2 - xvalue )* 4))
-		xvalue = canvas2.height/2 + ((canvas.width/2 - xvalue )* 4)
-		yvalue = canvas3.height/2 + ((canvas.height/2 - yvalue )* 4)
+		xvalue = canvas2.height/2 + ((canvas.width/2 - xvalue )* 4) *-1
+		yvalue = canvas3.height/2 + ((canvas.height/2 - yvalue )* 4) *-1
 		// canvas 2
 		c2.beginPath();
 		c2.moveTo(this.x,this.y);
