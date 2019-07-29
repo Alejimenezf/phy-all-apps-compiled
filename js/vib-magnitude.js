@@ -115,12 +115,14 @@ function circleMotion(){
 
 		}
 	}
-
-	this.getX =function(){
+	this.getXSpecial =function(){
 		return this.centerX + this.radius* Math.cos(toRadians(this.currentAngle + 90))
 	}
+	this.getX =function(){
+		return this.centerX + this.radius* Math.cos(toRadians(this.currentAngle))
+	}
 	this.getY =function(){
-		return this.centerY + this.radius* Math.sin(toRadians(this.currentAngle + 90))
+		return this.centerY + this.radius* Math.sin(toRadians(this.currentAngle))
 	}
 	this.getY1 = function(){
 		return this.centerY + this.radius* (2*Math.PI *gfrecq) * Math.cos(toRadians(this.currentAngle))	
@@ -511,5 +513,5 @@ function animate(){
 	c.clearRect(0,0, canvas.width , canvas.height);
 	c2.clearRect(0,0, canvas2.width , canvas2.height);
 	mBall.update();
-	graphDot.update(mBall.getX(),mBall.getY1(), mBall.getY2())
+	graphDot.update(mBall.getXSpecial(),mBall.getY1(), mBall.getY2())
 }
