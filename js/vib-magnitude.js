@@ -7,7 +7,7 @@ var boardWidthc2 = 300
 var boardHeightc2 = 158
 
 // canvas 3 heigh and width
-var boardWidthc3 = 530
+var boardWidthc3 = 529
 var boardHeightc3 = 180
 //=================================================
 // sliders
@@ -117,16 +117,16 @@ function circleMotion(){
 	}
 
 	this.getX =function(){
-		return this.centerX + this.radius* Math.cos(toRadians(this.currentAngle))
+		return this.centerX + this.radius* Math.cos(toRadians(this.currentAngle + 90))
 	}
 	this.getY =function(){
-		return this.centerY + this.radius* Math.sin(toRadians(this.currentAngle))
+		return this.centerY + this.radius* Math.sin(toRadians(this.currentAngle + 90))
 	}
 	this.getY1 = function(){
 		return this.centerY + this.radius* (2*Math.PI *gfrecq) * Math.cos(toRadians(this.currentAngle))	
 	}
 	this.getY2 = function(){
-		return this.centerY + this.radius* (2*Math.PI *gfrecq) * (2*Math.PI *gfrecq) * (-Math.sin(toRadians(this.currentAngle)))
+		return this.centerY + this.radius* (2*Math.PI *gfrecq) * (2*Math.PI *gfrecq) * (-Math.sin(toRadians(this.currentAngle + 90)))
 	}
 	this.update = function(){
 		this.currentAngle -= this.deltaAngle
