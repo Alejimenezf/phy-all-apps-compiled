@@ -126,7 +126,7 @@ function circleMotion(){
 		return this.centerY + this.radius* (2*Math.PI *gfrecq) * Math.cos(toRadians(this.currentAngle))	
 	}
 	this.getY2 = function(){
-		return this.centerY + this.radius* (2*Math.PI *gfrecq) * (2*Math.PI *gfrecq) * (-Math.sin(toRadians(this.currentAngle + 90)))
+		return this.centerY + this.radius* (2*Math.PI *gfrecq) * (2*Math.PI *gfrecq) * (-Math.sin(toRadians(this.currentAngle + 180)))
 	}
 	this.update = function(){
 		this.currentAngle -= this.deltaAngle
