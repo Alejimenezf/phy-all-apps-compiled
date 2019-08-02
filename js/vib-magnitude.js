@@ -259,10 +259,10 @@ function graphSetup(objc , cnum){
 			title = String.fromCharCode(8592) +"  µm " + String.fromCharCode(8594)
 			break;
 		case 2:
-			title = String.fromCharCode(8592) + "  mm/s" + String.fromCharCode(8594)
+			title = String.fromCharCode(8592) + "  µm/s" + String.fromCharCode(8594)
 			break;
 		case 3:
-			title = String.fromCharCode(8592) + "  m/s2" + String.fromCharCode(8594)
+			title = String.fromCharCode(8592) + "  µm/s2" + String.fromCharCode(8594)
 			break;
 	}
 
